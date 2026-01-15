@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Robotic Arm Controller</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <img src="armImage.png" class="image" alt="Arm Image" />
+
+      <header>
+        <h1>Robotic Arm <span class="accent">Control</span></h1>
+        <div class="connection-panel">
+          <select id="port-select">
+            <option value="" disabled selected>Select COM Port</option>
+          </select>
+          <button id="connect-btn">Connect</button>
+          <span id="status" class="status disconnected">Disconnected</span>
+        </div>
+      </header>
+
+      <main class="controls-grid">
+        <!-- Base Control -->
+        <div class="control-card">
+          <div class="card-header">
+            <h2>Base</h2>
+            <div class="toggle-switch">
+              <input
+                type="checkbox"
+                id="toggle-base"
+                data-cmd-on="STB"
+                data-cmd-off="SPB"
+              />
+              <label for="toggle-base"></label>
+            </div>
+          </div>
+          <div class="slider-container">
+            <input
+              type="range"
+              min="0"
+              max="180"
+              value="90"
+              class="slider"
+              id="slider-base"
+              data-cmd-prefix="B"
+              disabled
+            />
+            <div class="value-display"><span id="val-base">90</span>°</div>
+          </div>
+        </div>
+
+        <!-- Shoulder Control -->
+        <div class="control-card">
+          <div class="card-header">
+            <h2>Shoulder</h2>
+            <div class="toggle-switch">
+              <input
+                type="checkbox"
+                id="toggle-shoulder"
+                data-cmd-on="STS"
+                data-cmd-off="SPS"
+              />
+              <label for="toggle-shoulder"></label>
+            </div>
+          </div>
+          <div class="slider-container">
+            <input
+              type="range"
+              min="0"
+              max="180"
+              value="90"
+              class="slider"
+              id="slider-shoulder"
+              data-cmd-prefix="S"
+              disabled
+            />
+            <div class="value-display"><span id="val-shoulder">90</span>°</div>
+          </div>
+        </div>
+
+        <!-- Elbow Control -->
+        <div class="control-card">
+          <div class="card-header">
+            <h2>Elbow</h2>
+            <div class="toggle-switch">
+              <input
+                type="checkbox"
+                id="toggle-elbow"
+                data-cmd-on="STE"
+                data-cmd-off="SPE"
+              />
+              <label for="toggle-elbow"></label>
+            </div>
+          </div>
+          <div class="slider-container">
+            <input
+              type="range"
+              min="0"
+              max="180"
+              value="90"
+              class="slider"
+              id="slider-elbow"
+              data-cmd-prefix="E"
+              disabled
+            />
+            <div class="value-display"><span id="val-elbow">90</span>°</div>
+          </div>
+        </div>
+
+        <!-- Wrist Pitch Control -->
+        <div class="control-card">
+          <div class="card-header">
+            <h2>Wrist Pitch</h2>
+            <div class="toggle-switch">
+              <input
+                type="checkbox"
+                id="toggle-pitch"
+                data-cmd-on="STP"
+                data-cmd-off="SPP"
+              />
+              <label for="toggle-pitch"></label>
+            </div>
+          </div>
+          <div class="slider-container">
+            <input
+              type="range"
+              min="0"
+              max="180"
+              value="90"
+              class="slider"
+              id="slider-pitch"
+              data-cmd-prefix="WP"
+              disabled
+            />
+            <div class="value-display"><span id="val-pitch">90</span>°</div>
+          </div>
+        </div>
+
+        <!-- Wrist Roll Control -->
+        <div class="control-card">
+          <div class="card-header">
+            <h2>Wrist Roll</h2>
+            <div class="toggle-switch">
+              <input
+                type="checkbox"
+                id="toggle-roll"
+                data-cmd-on="STR"
+                data-cmd-off="SPR"
+              />
+              <label for="toggle-roll"></label>
+            </div>
+          </div>
+          <div class="slider-container">
+            <input
+              type="range"
+              min="0"
+              max="180"
+              value="40"
+              class="slider"
+              id="slider-roll"
+              data-cmd-prefix="WR"
+              disabled
+            />
+            <div class="value-display"><span id="val-roll">40</span>°</div>
+          </div>
+        </div>
+
+        <!-- Gripper Control -->
+        <div class="control-card">
+          <div class="card-header">
+            <h2>Gripper</h2>
+          </div>
+          <div class="slider-container">
+            <input
+              type="range"
+              min="0"
+              max="180"
+              value="90"
+              class="slider"
+              id="slider-gripper"
+              data-cmd-prefix="G"
+            />
+            <div class="value-display"><span id="val-gripper">90</span>°</div>
+          </div>
+          <div class="btn-group" style="margin-top: 1rem">
+            <button class="control-btn" data-cmd="M1">Open</button>
+            <button class="control-btn" data-cmd="M2">Close</button>
+          </div>
+        </div>
+
+        <!-- Sequence Control -->
+        
+        </div>
+      </main>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
+  </body>
+</html>
