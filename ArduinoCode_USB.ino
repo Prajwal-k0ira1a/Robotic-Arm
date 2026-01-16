@@ -32,9 +32,10 @@ int targetBase = 90;
 
 /* ---------- Shoulder ---------- */
 bool shoulderEnabled = false;
-float currentShoulder = 90.0;
-int targetShoulder = 90;
-
+float currentShoulder = 135.0;   // start mid‑range
+int targetShoulder = 135;
+const int SHOULDER_MIN = 0;
+const int SHOULDER_MAX = 270;
 /* ---------- Elbow ---------- */
 bool elbowEnabled = false;
 float currentElbow = 90.0;
@@ -109,14 +110,17 @@ void loop() {
       else if (baseEnabled && cmd == "BL") targetBase = max(JOINT_MIN, targetBase - JOINT_STEP);
       else if (baseEnabled && cmd == "BR") targetBase = min(JOINT_MAX, targetBase + JOINT_STEP);
 
-      /* ---------- SHOULDER ---------- */
-      else if (cmd == "STS") { shoulderServo.attach(7); shoulderEnabled = true; }
+     /* ---------- SHOULDER (MG665R 270°) ---------- */
+      else if (cmd == "STS") { shoulderServo.attach(7, 500, 2500); shoulderEnabled = true; }
       else if (cmd == "SPS") { shoulderServo.detach(); shoulderEnabled = false; }
-      else if (type == 'S' && shoulderEnabled && cmd.length() > 1 && isDigit(cmd.charAt(1)) && !cmd.startsWith("ST") && !cmd.startsWith("SP")) {
-        targetShoulder = constrain(val, JOINT_MIN, JOINT_MAX);
+      else if (type == 'S' && shoulderEnabled && cmd.length() > 1 && isDigit(cmd.charAt(1)) 
+               && !cmd.startsWith("ST") && !cmd.startsWith("SP")) {
+        targetShoulder = constrain(val, SHOULDER_MIN, SHOULDER_MAX);
       }
-      else if (shoulderEnabled && cmd == "SU") targetShoulder = min(JOINT_MAX, targetShoulder + JOINT_STEP);
-      else if (shoulderEnabled && cmd == "SD") targetShoulder = max(JOINT_MIN, targetShoulder - JOINT_STEP);
+      else if (shoulderEnabled && cmd == "SU") targetShoulder = min(SHOULDER_MAX, targetShoulder + JOINT_STEP);
+      else if (shoulderEnabled && cmd == "SD") targetShoulder = max(SHOULDER_MIN, targetShoulder - JOINT_STEP);
+
+
 
       /* ---------- ELBOW ---------- */
       else if (cmd == "STE") { elbowServo.attach(8); elbowEnabled = true; }
