@@ -37,11 +37,11 @@ const int ROLL_STEP = 20;
 bool baseEnabled = false;
 int basePos = 90;
 
-/* ---------- Shoulder (270° Servo) ---------- */
+/* ---------- Shoulder (180° Servo) ---------- */
 bool shoulderEnabled = false;
-int shoulderPos = 135;
+int shoulderPos = 90;
 const int SHOULDER_MIN = 0;
-const int SHOULDER_MAX = 270;
+const int SHOULDER_MAX = 180;
 const int SHOULDER_STEP = 5;
 
 /* ---------- Elbow ---------- */
@@ -74,7 +74,7 @@ void loop() {
 
   if (!BT.available()) return;
 
-  String cmd = BT.readString();
+  String cmd = BT.readStringUntil(\n);
   cmd.trim();
 
   if (cmd.length() == 0) {
@@ -159,12 +159,12 @@ void loop() {
     }
   }
 
-  /* ---------- SHOULDER (270°) ---------- */
+  /* ---------- SHOULDER (180°) ---------- */
   else if (cmd == "STS") {
     shoulderServo.attach(7, 500, 2500);
     shoulderServo.write(shoulderPos);
     shoulderEnabled = true;
-    infoMsg("Shoulder Enabled (270°)");
+    infoMsg("Shoulder Enabled 180°)");
   }
   else if (cmd == "SPS") {
     shoulderServo.detach();
