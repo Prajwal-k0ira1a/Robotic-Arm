@@ -1,0 +1,20 @@
+# Ignore node_modules (for Node.js projects)
+node_modules/
+
+# Ignore Python cache and virtual environments
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+env/
+
+# Ignore compiled code
+*.class
+*.o
+*.so
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+*.swp

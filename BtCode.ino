@@ -44,9 +44,12 @@ const int SHOULDER_MIN = 0;
 const int SHOULDER_MAX = 180;
 const int SHOULDER_STEP = 5;
 
-/* ---------- Elbow ---------- */
+/* ---------- Elbow (180° Servo) ---------- */
 bool elbowEnabled = false;
 int elbowPos = 90;
+const int ELBOW_MIN = 0;
+const int ELBOW_MAX = 180;
+const int ELBOW_STEP = 5;
 
 /* ---------- Utility ---------- */
 void errorMsg(const char* msg) {
@@ -183,12 +186,12 @@ void loop() {
     }
   }
 
-  /* ---------- ELBOW ---------- */
+  /* ---------- ELBOW (180°) ---------- */
   else if (cmd == "STE") {
-    elbowServo.attach(8);
+    elbowServo.attach(8, 500, 2500);
     elbowServo.write(elbowPos);
     elbowEnabled = true;
-    infoMsg("Elbow Enabled");
+    infoMsg("Elbow Enabled (180°)");
   }
   else if (cmd == "SPE") {
     elbowServo.detach();
@@ -199,9 +202,11 @@ void loop() {
     if (!elbowEnabled) {
       errorMsg("Elbow not enabled (send STE first)");
     } else {
-      if (cmd == "EU") elbowPos = min(JOINT_MAX, elbowPos + JOINT_STEP);
-      if (cmd == "ED") elbowPos = max(JOINT_MIN, elbowPos - JOINT_STEP);
+      if (cmd == "EU") elbowPos = min(ELBOW_MAX, elbowPos + ELBOW_STEP);
+      if (cmd == "ED") elbowPos = max(ELBOW_MIN, elbowPos - ELBOW_STEP);
       elbowServo.write(elbowPos);
+      Serial.print("[INFO] Elbow Position: ");
+      Serial.println(elbowPos);
     }
   }
 
