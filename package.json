@@ -1,17 +1,28 @@
 {
   "name": "arm-web",
   "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "homepage": "https://github.com/Prajwal-k0ira1a/Robotic-Arm#readme",
+  "bugs": {
+    "url": "https://github.com/Prajwal-k0ira1a/Robotic-Arm/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Prajwal-k0ira1a/Robotic-Arm.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
     "express": "^5.2.1",
     "serialport": "^13.0.0",
     "socket.io": "^4.8.3"
-  }
+  },
+  "devDependencies": {}
 }
